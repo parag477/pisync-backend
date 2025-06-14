@@ -10,9 +10,13 @@ const PORT = process.env.PORT || 5001;
 // Middleware
 app.use(cors({
   origin: ['http://localhost:3000', process.env.FRONTEND_URL],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token']
 }));
 app.use(express.json());
+
+app.options('*', cors());
 
 // Public Routes
 app.use('/api/auth', authRoutes);
